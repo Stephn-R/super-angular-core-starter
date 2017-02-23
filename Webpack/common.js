@@ -9,11 +9,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 /*= End of MODULES =*/
 /*=============================================<<<<<*/
 
-if (process.env.ASPNETCORE_ENVIRONMENT === 'development' || process.env.ASPNETCORE_ENVIRONMENT === 'dev') {
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev') {
   process.env = require('../appsettings.json');
 }
 
-const PROD = (process.env.ASPNETCORE_ENVIRONMENT === 'production');
+const PROD = (process.env.NODE_ENV === 'production');
 
 module.exports = {
   entry:          {
@@ -23,8 +23,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '..', 'wwwroot', 'dist'),
-    filename: '[name].bundle.js',
     publicPath: '/dist/',
+    filename: '[name].bundle.js',
     sourceMapFilename: '[name].map'
   },
   resolve: {
@@ -43,7 +43,6 @@ module.exports = {
       {
         test: /\.(sass|scss)$/,
         use: [
-          'raw-loader',
           'css-to-string-loader',
           'css-loader?sourceMap',
           'postcss-loader',
@@ -53,7 +52,7 @@ module.exports = {
       {
         test: /\.html$/,
         use: [
-          'raw-loader'
+          'html-loader'
         ],
       },
       {
@@ -66,7 +65,14 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
+    new HtmlWebpackPlugin({
+      showError:      true,
+      template:       './Client/index.html',
+      filename:       './../../Views/Home/Index.cshtml',
+      chunksSortMode: 'dependency',
+      publicPath:     '/dist/'
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['polyfills', 'vendors'].reverse(),
