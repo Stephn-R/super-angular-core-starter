@@ -4,16 +4,16 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /*= End of MODULES =*/
 /*=============================================<<<<<*/
 
-if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev') {
+if (process.env.ASPNETCORE_ENVIRONMENT === 'development' || process.env.ASPNETCORE_ENVIRONMENT === 'dev') {
   process.env = require('../appsettings.json');
 }
 
-const PROD = (process.env.NODE_ENV === 'production');
+const PROD = (process.env.ASPNETCORE_ENVIRONMENT === 'production');
 
 module.exports = {
   entry:          {
@@ -65,15 +65,15 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.NODE_ENV': JSON.stringify(process.env.ASPNETCORE_ENVIRONMENT),
     }),
-    new HtmlWebpackPlugin({
-      showError:      true,
-      template:       './Client/index.html',
-      filename:       './../../Views/Home/Index.cshtml',
-      chunksSortMode: 'dependency',
-      publicPath:     '/dist/'
-    }),
+    // new HtmlWebpackPlugin({
+    //   showError:      true,
+    //   template:       './Client/index.html',
+    //   filename:       './../../Views/Home/Index.cshtml',
+    //   chunksSortMode: 'dependency',
+    //   publicPath:     '/dist/'
+    // }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['polyfills', 'vendors'].reverse(),
     }),
