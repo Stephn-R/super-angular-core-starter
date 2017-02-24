@@ -9,17 +9,19 @@
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    "outDir": "bin",
+    "outDir": "wwwroot/bin",
     "preserveConstEnums": true,
     "removeComments": true,
-    "rootDir": ".",
+    "rootDir": "Client",
     "sourceMap": true,
     "target": "es5"
   },
   "exclude": [
     "bin",
-    "wwwroot",
-    "node_modules"
+    "node_modules",
+    "obj",
+    "out",
+    "wwwroot"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

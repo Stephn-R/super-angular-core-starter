@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "Client/main.browser.ts",
-  "scripts": {},
+  "scripts": {
+    "prebuild": "dotnet restore",
+    "build": "dotnet publish -c Release -o out"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stephn-R/super-angular2-starter.git"

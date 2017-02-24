@@ -62,7 +62,7 @@
   "scripts": {
     "prepublish": [
       "npm install",
-      "node node_modules/webpack/bin/webpack.js"
+      "node ./node_modules/webpack/bin/webpack.js"
     ],
     "postpublish": [
       "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
