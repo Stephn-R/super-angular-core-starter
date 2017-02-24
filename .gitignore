@@ -42,5 +42,6 @@ jspm_packages
 
 # Compiled Application Code
 bin
-wwwroot
+wwwroot/dist
+wwwroot/bin
 out

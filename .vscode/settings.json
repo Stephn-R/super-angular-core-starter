@@ -9,7 +9,7 @@
     "obj": true,
     "out": true,
     "node_modules": true,
-    "wwwroot": true,
+    "wwwroot/dist": true,
     "npm-debug.log*": true
   }
 }

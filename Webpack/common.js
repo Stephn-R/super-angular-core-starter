@@ -9,10 +9,12 @@ const webpack = require('webpack');
 /*= End of MODULES =*/
 /*=============================================<<<<<*/
 
+// Load Environment Variables if in DEV mode
 if (process.env.ASPNETCORE_ENVIRONMENT === 'development' || process.env.ASPNETCORE_ENVIRONMENT === 'dev') {
   process.env = require('../appsettings.json');
 }
 
+/** Boolean flag for PRODUCTION */
 const PROD = (process.env.ASPNETCORE_ENVIRONMENT === 'production');
 
 module.exports = {
@@ -67,13 +69,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.ASPNETCORE_ENVIRONMENT),
     }),
-    // new HtmlWebpackPlugin({
-    //   showError:      true,
-    //   template:       './Client/index.html',
-    //   filename:       './../../Views/Home/Index.cshtml',
-    //   chunksSortMode: 'dependency',
-    //   publicPath:     '/dist/'
-    // }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['polyfills', 'vendors'].reverse(),
     }),

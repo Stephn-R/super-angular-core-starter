@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApplication
 {
@@ -14,8 +15,14 @@ namespace WebApplication
         /// <param name="args">the console arguments</param>
         public static void Main(string[] args)
         {
+            // Build command-line vars
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+
             // Initialize the Web Host + Run
             var host = new WebHostBuilder()
+                .UseConfiguration(config)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
